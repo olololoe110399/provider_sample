@@ -1,0 +1,8 @@
+{
+  "hello": "xin chao",
+  "doNotEmpty": "Không được để trống!",
+  "emailError": "Email không đúng định dạng",
+  "passwordError": "Password phải lớn hơn 6",
+  "usernameLoginSuccess": "Login thành công!",
+  "favorite": "Favorite"
+}
