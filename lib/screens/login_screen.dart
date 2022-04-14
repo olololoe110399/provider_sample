@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.all(24),
+          padding: EdgeInsets.all(AppDimens.w24),
           child: ListView(
             children: [
               Image.asset(
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 16),
               TextField(
                 decoration: InputDecoration(
-                  label: const Text("Password"),
+                  label: Text(S.of(context).doNotEmpty),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),

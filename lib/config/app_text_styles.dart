@@ -7,8 +7,14 @@ class AppTextStyles {
   static const String openSansRegular = 'OpenSans-Regular';
 
   static final normal10cFFFFFF = TextStyle(
-    fontFamily: openSansBold,
+    fontFamily: openSansRegular,
     fontSize: AppDimens.sp10,
     color: AppColors.cFFFFFF,
+  );
+
+  static final bold30c000000o87 = TextStyle(
+    fontFamily: openSansBold,
+    fontSize: AppDimens.sp30,
+    color: AppColors.c000000o87,
   );
 }

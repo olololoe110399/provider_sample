@@ -6,6 +6,7 @@ import 'package:sample/config/app_colors.dart';
 import 'package:sample/config/app_constants.dart';
 import 'package:sample/generated/l10n.dart';
 import 'package:sample/providers/store.dart';
+import 'package:sample/providers/store_user.dart';
 import 'package:sample/screens/login_screen.dart';
 import 'package:sample/screens/main_screen.dart';
 import 'package:sample/screens/product_detail.dart';
@@ -19,19 +20,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Store(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Store()),
+        ChangeNotifierProvider(create: (_) => StoreUser()),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(
           AppConstants.designWidth,
           AppConstants.designHeight,
         ),
-        builder: () => _builder(),
+        builder: () => _builderMaterialApp(),
       ),
     );
   }
 
-  MaterialApp _builder() {
+  MaterialApp _builderMaterialApp() {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // setup locale
