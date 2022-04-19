@@ -129,6 +129,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Movie Screen`
+  String get movieScreen {
+    return Intl.message(
+      'Movie Screen',
+      name: 'movieScreen',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
