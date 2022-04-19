@@ -109,6 +109,36 @@ class S {
       args: [],
     );
   }
+
+  /// `model`
+  String get model {
+    return Intl.message(
+      'model',
+      name: 'model',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `List Product`
+  String get listProduct {
+    return Intl.message(
+      'List Product',
+      name: 'listProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Movie Screen`
+  String get movieScreen {
+    return Intl.message(
+      'Movie Screen',
+      name: 'movieScreen',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

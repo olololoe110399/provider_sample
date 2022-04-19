@@ -8,6 +8,7 @@ import 'package:sample/generated/l10n.dart';
 import 'package:sample/providers/store.dart';
 import 'package:sample/screens/login_screen.dart';
 import 'package:sample/screens/main_screen.dart';
+import 'package:sample/screens/movies_screen.dart';
 import 'package:sample/screens/product_detail.dart';
 
 void main() {
@@ -50,11 +51,12 @@ class MyApp extends StatelessWidget {
         primaryColor: AppColors.c2196F3,
       ),
       // navigation
-      initialRoute: '/login',
+      initialRoute: '/movies',
       routes: {
         '/login': (context) => const LoginScreen(),
         '/': (context) => const MainScreen(),
         '/product': (context) => const ProductDetailScreen(),
+        '/movies': (context) => const MoviesScreen(),
       },
     );
   }

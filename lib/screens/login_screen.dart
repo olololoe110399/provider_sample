@@ -37,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (newErrors.isEmpty) {
       final store = Provider.of<Store>(context, listen: false);
       store.saveUser(User(userName, password));
+      Navigator.pushNamed(context, '/');
     }
     setState(() {
       errors = newErrors;

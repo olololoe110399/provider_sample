@@ -11,4 +11,16 @@ class AppTextStyles {
     fontSize: AppDimens.sp10,
     color: AppColors.cFFFFFF,
   );
+
+  static final bold30c000000o87 = TextStyle(
+    fontFamily: openSansBold,
+    fontSize: AppDimens.sp30,
+    color: AppColors.c000000,
+  );
+
+  static final bold24cFFFFFFo87 = TextStyle(
+    fontFamily: openSansBold,
+    fontSize: AppDimens.sp24,
+    color: AppColors.cFFFFFF,
+  );
 }

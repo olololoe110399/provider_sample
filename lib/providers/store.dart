@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:sample/models/movie.dart';
 import 'package:sample/models/product.dart';
 import 'package:dartx/dartx.dart';
 import 'package:sample/models/user.dart';
+import 'package:sample/repository/repository.dart';
 
 class Store extends ChangeNotifier {
+  final _repository = Repository();
   List<Product> _products = [];
   final List<Product> _favorites = [];
+  final List<Movie> _movies = [];
   Product? _active;
   User? _user;
 
@@ -20,6 +24,7 @@ class Store extends ChangeNotifier {
 
   List<Product> get products => _products;
   List<Product> get favorites => _favorites;
+  List<Movie> get movies => _movies;
   Product? get activeProduct => _active;
   User? get getUser => _user;
 
@@ -77,5 +82,12 @@ class Store extends ChangeNotifier {
 
   saveUser(User user) {
     _user = user;
+  }
+
+  Future<void> fetchMoviesPopular() async {
+    _movies.clear();
+    final newMovies = await _repository.fetchMoviesPopular();
+    _movies.addAll(newMovies);
+    notifyListeners();
   }
 }
