@@ -3,6 +3,8 @@ import 'package:sample/models/movie.dart';
 import 'package:sample/models/product.dart';
 import 'package:dartx/dartx.dart';
 import 'package:sample/models/user.dart';
+import 'package:sample/repository/remote/error/app_exception.dart';
+import 'package:sample/repository/remote/my_api_sevice.dart';
 import 'package:sample/repository/repository.dart';
 
 class Store extends ChangeNotifier {
@@ -12,6 +14,7 @@ class Store extends ChangeNotifier {
   final List<Movie> _movies = [];
   Product? _active;
   User? _user;
+  void Function(String)? handleError;
 
   Store() {
     _products = [
@@ -84,10 +87,15 @@ class Store extends ChangeNotifier {
     _user = user;
   }
 
-  Future<void> fetchMoviesPopular() async {
+  void fetchMoviesByCategory(Category category) {
     _movies.clear();
-    final newMovies = await _repository.fetchMoviesPopular();
-    _movies.addAll(newMovies);
-    notifyListeners();
+    _repository.fetchMoviesByCategory(category).then((newMovies) {
+      _movies.addAll(newMovies);
+      notifyListeners();
+    }).catchError((error) {
+      handleError?.call(
+        error.toString(),
+      );
+    });
   }
 }

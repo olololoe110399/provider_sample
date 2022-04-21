@@ -5,8 +5,10 @@ class AppConstants {
   static const double designHeight = 812;
   static const String regex =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  // Server constant
   static const String apiKeyValue = '74c117ba95e20ba9d103ea81588c6880';
   static const String apiKey = 'api_key';
   static const String baseUrl = 'https://api.themoviedb.org/3';
+  // path url
   static const String moviePopularPath = 'movie/popular';
 }
