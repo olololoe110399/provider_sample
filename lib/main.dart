@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           AppConstants.designWidth,
           AppConstants.designHeight,
         ),
-        builder: () => _builderMaterialApp(),
+        builder: (_) => _builderMaterialApp(),
       ),
     );
   }

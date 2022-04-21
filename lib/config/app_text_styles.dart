@@ -21,7 +21,6 @@ class AppTextStyles {
   static final bold24cFFFFFFo87 = TextStyle(
     fontFamily: openSansBold,
     fontSize: AppDimens.sp24,
-    color: AppColors.cFFFFFF,
     color: AppColors.c000000o87,
   );
 }

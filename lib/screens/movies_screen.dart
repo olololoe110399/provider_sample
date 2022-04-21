@@ -5,6 +5,7 @@ import 'package:sample/config/app_dimens.dart';
 import 'package:sample/config/app_text_styles.dart';
 import 'package:sample/generated/l10n.dart';
 import 'package:sample/providers/store.dart';
+import 'package:sample/repository/remote/my_api_sevice.dart';
 
 class MoviesScreen extends StatefulWidget {
   const MoviesScreen({Key? key}) : super(key: key);
@@ -17,7 +18,35 @@ class _MoviesScreenState extends State<MoviesScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<Store>(context, listen: false).fetchMoviesPopular();
+    Provider.of<Store>(context, listen: false)
+        .fetchMoviesByCategory(Category.popular);
+    Provider.of<Store>(context, listen: false).handleError = (error) {
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Lỗi'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('This is a demo alert dialog.'),
+                  Text('$error'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Approve'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    };
   }
 
   @override
@@ -30,15 +59,20 @@ class _MoviesScreenState extends State<MoviesScreen> {
           style: AppTextStyles.bold24cFFFFFFo87,
         ),
       ),
-      body: ListView(
-        children: [
-          ...store.movies.map(
-            (e) => Text(e.title ?? ""),
-          ),
-          ...store.movies.map(
-            (e) => Text(e.title ?? ""),
-          ),
-        ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          store.fetchMoviesByCategory(Category.nowPlaying);
+        },
+        child: ListView(
+          children: [
+            ...store.movies.map(
+              (e) => Text(e.title ?? ""),
+            ),
+            ...store.movies.map(
+              (e) => Text(e.title ?? ""),
+            ),
+          ],
+        ),
       ),
     );
   }
