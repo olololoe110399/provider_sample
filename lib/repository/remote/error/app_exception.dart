@@ -13,6 +13,12 @@ class FetchDataException extends AppException {
   ) : super('Fetch Data error:', message);
 }
 
+class NotInternet extends AppException {
+  NotInternet(
+    String message,
+  ) : super('Not connection internet', message);
+}
+
 class BadRequestException extends AppException {
   BadRequestException(
     String message,
@@ -21,6 +27,12 @@ class BadRequestException extends AppException {
 
 class UnauthorizedException extends AppException {
   UnauthorizedException(
+    String message,
+  ) : super('Unauthorized :', message);
+}
+
+class RemoteException extends AppException {
+  RemoteException(
     String message,
   ) : super('Unauthorized :', message);
 }

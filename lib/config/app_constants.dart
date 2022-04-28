@@ -8,7 +8,7 @@ class AppConstants {
   // Server constant
   static const String apiKeyValue = '74c117ba95e20ba9d103ea81588c6880';
   static const String apiKey = 'api_key';
-  static const String baseUrl = 'https://api.themoviedb.org/3';
+  static const String baseUrl = 'https://api.themoviedb.org/3/';
   // path url
   static const String moviePopularPath = 'movie/popular';
 }

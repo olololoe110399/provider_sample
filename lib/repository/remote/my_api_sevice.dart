@@ -10,7 +10,7 @@ class MyApiService extends ApiService {
       method: Method.get,
       url: 'movie/${category.path}',
     );
-    return MovieResponse.fromJson(map).result;
+    return MovieResponse.fromJson(map).results ?? [];
   }
 }
 
