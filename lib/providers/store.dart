@@ -41,7 +41,6 @@ class Store extends ChangeNotifier {
   }
 
   addItemToFavorite(Product product) {
-    print("adding ${product.name}");
     Product? found = _favorites.firstOrNullWhere((p) => p.id == product.id);
     if (found != null) {
       found.quantity += 1;
@@ -89,5 +88,9 @@ class Store extends ChangeNotifier {
     final newMovies = await _repository.fetchMoviesPopular();
     _movies.addAll(newMovies);
     notifyListeners();
+  }
+
+  Future<List<Movie>> fetchMoviesByCategoryFuture(Category category) {
+    return _repository.fetchMoviesByCategory(category);
   }
 }

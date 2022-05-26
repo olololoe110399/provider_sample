@@ -44,6 +44,12 @@ dependencies:
   json_annotation: ^4.4.0
   freezed_annotation: ^2.0.0
   http: ^0.13.4
+  retrofit: ^3.0.1+1
+  logger: ^1.1.0
+  flutter_bloc: ^8.0.1
+  rxdart: ^0.27.3
+  shared_preferences: ^2.0.15
+  sqflite: ^2.0.2
 
 dev_dependencies:
   flutter_test:

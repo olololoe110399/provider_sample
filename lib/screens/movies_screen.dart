@@ -4,6 +4,7 @@ import 'package:sample/config/app_colors.dart';
 import 'package:sample/config/app_dimens.dart';
 import 'package:sample/config/app_text_styles.dart';
 import 'package:sample/generated/l10n.dart';
+import 'package:sample/models/movie.dart';
 import 'package:sample/providers/store.dart';
 
 class MoviesScreen extends StatefulWidget {
@@ -21,8 +22,12 @@ class _MoviesScreenState extends State<MoviesScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final store = Provider.of<Store>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -31,14 +36,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
         ),
       ),
       body: ListView(
-        children: [
-          ...store.movies.map(
-            (e) => Text(e.title ?? ""),
-          ),
-          ...store.movies.map(
-            (e) => Text(e.title ?? ""),
-          ),
-        ],
+        children: [],
       ),
     );
   }

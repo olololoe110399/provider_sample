@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:sample/config/app_colors.dart';
-import 'package:sample/config/app_constants.dart';
-import 'package:sample/generated/l10n.dart';
-import 'package:sample/providers/store.dart';
-import 'package:sample/providers/store_user.dart';
-import 'package:sample/screens/login_screen.dart';
-import 'package:sample/screens/main_screen.dart';
-import 'package:sample/screens/movies_screen.dart';
-import 'package:sample/screens/product_detail.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sample/blocs/bloc.dart';
+import 'package:sample/blocs/event.dart';
+import 'package:sample/models/item.dart';
+import 'package:sample/repository/local/shared_pref_helper.dart';
+import 'package:sample/repository/local/sql_hepler.dart';
+import 'package:sample/repository/repository.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefHelper.instance.setup();
+  await SQLHelper.deleteItem(1);
+
+  final result = await SQLHelper.getItems();
+
+  print(result.map((e) => e.toJson()));
   runApp(const MyApp());
 }
 
@@ -21,47 +23,36 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => Store()),
-        ChangeNotifierProvider(create: (_) => StoreUser()),
-      ],
-      child: ScreenUtilInit(
-        designSize: const Size(
-          AppConstants.designWidth,
-          AppConstants.designHeight,
-        ),
-        builder: () => _builderMaterialApp(),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyHome(),
     );
   }
+}
 
-  MaterialApp _builderMaterialApp() {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      // setup locale
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      locale: const Locale('ja', 'JP'),
-      // title
-      title: '',
-      // theme
-      theme: ThemeData(
-        primaryColor: AppColors.c2196F3,
+class MyHome extends StatefulWidget {
+  const MyHome({Key? key}) : super(key: key);
+
+  @override
+  State<MyHome> createState() => _MyHomeState();
+}
+
+class _MyHomeState extends State<MyHome> {
+  final _repository = Repository();
+  @override
+  void initState() {
+    if (!_repository.isFirstLogin) {
+      _repository.isFirstLogin = true;
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('title'),
       ),
-      // navigation
-      initialRoute: '/movies',
-      routes: {
-        '/login': (context) => const LoginScreen(),
-        '/': (context) => const MainScreen(),
-        '/product': (context) => const ProductDetailScreen(),
-        '/movies': (context) => const MoviesScreen(),
-      },
     );
   }
 }
